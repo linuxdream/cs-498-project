@@ -421,7 +421,7 @@
           }
           break;
         case 'u':
-          if (c.armed !== 'undetermined' || !c.armed) {
+          if (c.armed !== 'unknown' && c.armed) {
             return false;
           }
           break;
