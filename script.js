@@ -295,7 +295,7 @@
         return t;
       }
     }, {});
-    console.log('byarmeddata', byArmedData);
+
     // Convert object into array
     let byArmedDataArray = [];
 
@@ -372,7 +372,7 @@
         return d.y0 + 20
       })
       .text(function (d) {
-        return d.data.armed
+        return `${d.data.armed} (${d.data.value})`
       })
       .attr("font-size", "12px")
       .attr("fill", "black")
