@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>CS-498: Data Visualization - Final Project</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="mx-auto">
+  <h1 class="title mx-auto">2015-2019 Police Shooting Data</h1>
+
+  <div>
+    The Washington Post has, since 2015, reported on all
+    <a href="https://www.washingtonpost.com/graphics/2019/national/police-shootings-2019/" target="_blank">police-involved shooting deaths</a>
+    in the United States. Their narrative visualization of the data is quite good and I have attempted to recreate it here with different visualizations. Ideally, these numbers would be done on a per-capita basis (both state population and race population) but this was not done due to time limitations for the project.
+  </div>
+  <div>
+    This report is based on
+    <a href="https://github.com/washingtonpost/data-police-shootings/blob/master/fatal-police-shootings-data.csv" target="_blank">all 2015-2019</a>
+    data and shows all fatal police encounters in the United States. It follows a scrolling interactive slideshow format and allows for selective filtering of criteria.
+  </div>
+
+  <hr />
+  <legend>Filters</legend>
+  <!-- Filters -->
+  <div class="for-check form-check-inline">
+    <fieldset class="race-checkboxes">
+      <legend>Race</legend>
+      <input class="form-check-input" type="checkbox" name="race" value="A" />
+      <label class="form-check-label">Asian</label>
+      <input class="form-check-input" type="checkbox" name="race" value="B" />
+      <label class="form-check-label">Black</label>
+      <input class="form-check-input" type="checkbox" name="race" value="W" />
+      <label class="form-check-label">White</label>
+      <input class="form-check-input" type="checkbox" name="race" value="H" />
+      <label class="form-check-label">Hispanic</label>
+      <input class="form-check-input" type="checkbox" name="race" value="O" />
+      <label class="form-check-label">Other/Unknown</label>
+    </fieldset>
+  </div>
+
+  <div class="row">
+    <div class="armed col-sm-6">
+      <fieldset>
+        <legend>Armed</legend>
+        <select name="armed" id="armed" class="form-control">
+          <option value=""></option>
+          <option value="y">Yes</option>
+          <option value="n">No</option>
+          <option value="u">Unknown</option>
+        </select>
+      </fieldset>
+    </div>
+    <div class="gender col-sm-6">
+      <fieldset>
+        <legend>Gender</legend>
+        <select name="gender" id="gender" class="form-control">
+          <option value=""></option>
+          <option value="M">M</option>
+          <option value="F">F</option>
+          <option value="U">Unknown</option>
+        </select>
+      </fieldset>
+    </div>
+  </div>
+  <hr />
+
+  <!-- Charts -->
+  <div id="byState">
+    <h2>Shootings by State</h2>
+    <p>
+      In the first graph, we can see an overarching breakdown of shootings by state. California leads the pack with 678 for all four years followed by Texas and Florida.
+    </p>
+    <svg id="byStateGraph" height="900" width="900"></svg>
+  </div>
+
+  <div class="byRace">
+    <h2>Shootings per Year by Victim Race</h2>
+    <p>
+      Next, we have a graph that shows the trends each year by race. 2019 is not yet complete which explains the low numbers there. Interesting points to note is the increasing trend in victim deaths of an unknown racial type. This could signal increasing numbers of mixed race or ethnically ambiguous victims. Additionally, White victim rates seem particularly low for this point of the year. We would expect, being more than half way through the year that the 2019 point would be at least half-way from 0 to the 2018 rate. This might signal a significant decline in the deaths of white victims for 2019. However, this would agree with the overall downward trend in white victims seen in the last four years.
+    </p>
+    <p>
+      <span class="dot green"></span>
+      <label for="">Asian</label>
+      <span class="dot black"></span>
+      <label for="">Black</label>
+      <span class="dot orange"></span>
+      <label for="">White</label>
+      <span class="dot red"></span>
+      <label for="">Hispanic</label>
+      <span class="dot grey"></span>
+      <label for="">Other</label>
+      <span class="dot blue"></span>
+      <label for="">Unknown</label>
+
+
+    </p>
+    <svg id="byRaceGraph" height="400" width="500"></svg>
+  </div>
+
+  <div class="byArmed">
+    <h2>Shootings by Armed Status</h2>
+    <p>
+      Finally, we have a tree graph breakdown of the top ten weapons that were used by the victims when they were killed. As we can see, a gun was by far the most common weapon followed by a knife. Surprisingly, unarmed victims comprise a relatively large number of those killed by police. In total, there were 83 armed statuses in the data set.
+    </p>
+    <svg id="byArmedGraph" height="600" width="900"></svg>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+
+  <script src="script.js" defer="defer"></script>
+</body>
+
+</html>
